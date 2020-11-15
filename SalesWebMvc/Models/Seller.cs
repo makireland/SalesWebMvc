@@ -10,27 +10,28 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Field can't be empty")]
+        [Required(ErrorMessage = "{0} Required")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage ="{0} must be between {2} to {1}")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Field can't be empty")]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} Required")]
+        [EmailAddress(ErrorMessage ="Enter a valid email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Field can't be empty")]
+        [Required(ErrorMessage = "{0} Required")]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateBirth { get; set; }
 
-        [Required(ErrorMessage = "Field can't be empty")]
+        [Required(ErrorMessage = "{0} Required")]
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Range(100.0, 50000.0, ErrorMessage ="{0} must be from {1} to {2}")]
         public double BaseSalary { get; set; }
 
         public Department Department { get; set; }
 
-        [Required(ErrorMessage = "Field can't be empty")]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
